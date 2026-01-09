@@ -1,0 +1,44 @@
+{
+  "page_number": 8,
+  "version_number": 1,
+  "reading_order": {
+    "sequence": [
+      {
+        "block_id": "block1",
+        "layout_tag": "footnote",
+        "coordinates": {
+          "x1": 92.33843690935133,
+          "y1": 8.909868876139324,
+          "x2": 95.15497672301282,
+          "y2": 25.383626302083332
+        },
+        "reading_order": 1,
+        "block_text": "(ઉપર પ્રમાણે)"
+      },
+      {
+        "block_id": "block2",
+        "layout_tag": "figure",
+        "coordinates": {
+          "x1": 178.90678567250572,
+          "y1": 381.8999080403646,
+          "x2": 2456.902934366862,
+          "y2": 3387.977809244792
+        },
+        "reading_order": 2
+      },
+      {
+        "block_id": "block3",
+        "block_text": "જયદેવજીવનમાં",
+        "layout_tag": "footnote",
+        "coordinates": {
+          "x1": 92.17506362301017,
+          "y1": 67.41071428571428,
+          "x2": 94.77154428844707,
+          "y2": 91.3690476190476
+        },
+        "reading_order": 3
+      }
+    ],
+    "total_items": 3
+  }
+}
