@@ -4,9 +4,9 @@ from core.renderer import BlockRenderer
 from assets.css import CSS
 
 class PDFToHTMLGenerator:
-    def __init__(self, mode="scanned", dpi=200):
+    def __init__(self, mode="scanned", dpi=225):
         self.mode = mode
-        self.dpi = dpi
+        self.dpi = int(dpi)
 
     def generate_html(self, json_files, pdf_path, output_path):
         sources = PDFSources(self.mode, self.dpi)

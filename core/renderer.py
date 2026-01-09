@@ -12,35 +12,35 @@ class BlockRenderer:
 
     def render_figure(self, page_num, block):
         # Scanned PDF
-        if self.mode == "scanned":
-            coords = block.get("coordinates")
-            if not coords:
-                return ""
+        # if self.mode == "scanned":
+        coords = block.get("coordinates")
+        if not coords:
+            return ""
 
-            img = self.sources.page_images[page_num]
-            crop = img.crop((
-                int(coords["x1"]),
-                int(coords["y1"]),
-                int(coords["x2"]),
-                int(coords["y2"])
-            ))
+        img = self.sources.page_images[page_num]
+        crop = img.crop((
+            int(coords["x1"]),
+            int(coords["y1"]),
+            int(coords["x2"]),
+            int(coords["y2"])
+        ))
 
-        # Digital PDF (spatial image order)
-        else:
-            images = self.sources.sorted_images_by_page.get(page_num)
-            if not images:
-                return ""
+        # # Digital PDF (spatial image order)
+        # else:
+        #     images = self.sources.sorted_images_by_page.get(page_num)
+        #     if not images:
+        #         return ""
 
-            img_obj = images.pop(0)
+        #     img_obj = images.pop(0)
 
-            with pdfplumber.open(self.pdf_path) as pdf:
-                page = pdf.pages[page_num]
-                crop = page.crop((
-                    img_obj["x0"],
-                    img_obj["top"],
-                    img_obj["x1"],
-                    img_obj["bottom"]
-                )).to_image(resolution=self.dpi).original
+        #     with pdfplumber.open(self.pdf_path) as pdf:
+        #         page = pdf.pages[page_num]
+        #         crop = page.crop((
+        #             img_obj["x0"],
+        #             img_obj["top"],
+        #             img_obj["x1"],
+        #             img_obj["bottom"]
+        #         )).to_image().original
 
         b64 = image_to_base64(crop)
         return f'<img src="data:image/png;base64,{b64}">'

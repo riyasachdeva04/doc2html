@@ -9,7 +9,7 @@ def main():
     parser.add_argument("--pdf", required=True)
     parser.add_argument("--json", required=True)
     parser.add_argument("--output", required=True)
-    parser.add_argument("--mode", choices=["scanned", "digital"], required=True)
+    parser.add_argument("--dpi", required=True)
     args = parser.parse_args()
 
     json_files = []
@@ -20,7 +20,7 @@ def main():
 
     json_files.sort(key=lambda x: x["data"]["page_number"])
 
-    gen = PDFToHTMLGenerator(mode=args.mode)
+    gen = PDFToHTMLGenerator(dpi=args.dpi)
     gen.generate_html(json_files, args.pdf, args.output)
 
     print("✓ HTML generated:", args.output)
