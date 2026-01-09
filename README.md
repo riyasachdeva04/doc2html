@@ -26,13 +26,6 @@ This project converts PDFs into structured HTML using page-wise layout JSONs
    - Column content rendered left-to-right
    - Figures rendered as page-level elements to avoid layout breakage
 
-## Notes
-
-- For **scanned PDFs**, figures are extracted by cropping the rasterized page using
-  bounding boxes from the layout JSONs. Since these bounding boxes are derived from
-  scanned content rather than embedded digital objects, image crops may occasionally
-  include extra surrounding regions.
-
 ## Outputs
 
 - Generated HTML files for both documents:
@@ -43,4 +36,4 @@ This project converts PDFs into structured HTML using page-wise layout JSONs
 
 ```bash
 pip install -r requirements.txt
-python main.py --pdf input.pdf --json json_dir --output output.html --mode scanned|digital
+python main.py --pdf input.pdf --json json_dir --output output.html --dpi res

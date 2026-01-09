@@ -1,5 +1,5 @@
 from core.sources import PDFSources
-from core.layout import split_blocks_by_layout
+from core.layout import split_blocks_by_layout, detect_num_columns
 from core.renderer import BlockRenderer
 from assets.css import CSS
 
@@ -50,20 +50,27 @@ class PDFToHTMLGenerator:
                 html_out += "</div>\n"
                 continue
 
-            mid = page_width / 2
-            left = [b for b in column_blocks if b["coordinates"]["x1"] < mid]
-            right = [b for b in column_blocks if b["coordinates"]["x1"] >= mid]
+            num_columns = detect_num_columns(column_blocks, page_width)
+            column_width = page_width / num_columns
+
+            columns = {f"column{i+1}": [] for i in range(num_columns)}
+
+            for b in column_blocks:
+                x1 = b["coordinates"]["x1"]
+                col_idx = int(x1 // column_width)
+                col_idx = min(col_idx, num_columns - 1)
+                columns[f"column{col_idx + 1}"].append(b)
 
             for b in full_width:
                 html_out += renderer.render_block(page_num, b, 4)
 
-            html_out += "<div class='column-layout'>\n<div class='column'>\n"
-            for b in left:
-                html_out += renderer.render_block(page_num, b, 6)
-            html_out += "</div>\n<div class='column'>\n"
-            for b in right:
-                html_out += renderer.render_block(page_num, b, 6)
-            html_out += "</div>\n</div>\n</div>\n"
+            html_out += "<div class='column-layout'>\n"
+            for i in range(1, num_columns + 1):
+                html_out += "<div class='column'>\n"
+                for b in columns[f"column{i}"]:
+                    html_out += renderer.render_block(page_num, b, 6)
+                html_out += "</div>\n"
+            html_out += "</div>\n</div>\n"
 
         html_out += "</body></html>"
 
