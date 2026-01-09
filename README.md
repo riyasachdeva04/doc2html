@@ -9,18 +9,14 @@ This project converts PDFs into structured HTML using page-wise layout JSONs
    - PDF document
    - Page-wise JSONs with layout tags, reading order, and bounding boxes
 
-2. **PDF Handling**
-   - **Scanned PDFs**: pages are rasterized, figures are cropped using block coordinates
-   - **Digital PDFs**: images are extracted and spatially sorted (top → bottom, left → right)
-
-3. **Layout Reconstruction**
+2. **Layout Reconstruction**
    - Reading order from JSON is treated as authoritative
    - Blocks are classified geometrically into:
      - **Full-width blocks** (titles, wide figures)
      - **Column blocks** (multi-column text)
    - Columns are inferred using x-position relative to page width
 
-4. **Rendering**
+3. **Rendering**
    - One A4-sized HTML container per page
    - Full-width blocks rendered before columns
    - Column content rendered left-to-right
@@ -29,8 +25,8 @@ This project converts PDFs into structured HTML using page-wise layout JSONs
 ## Outputs
 
 - Generated HTML files for both documents:
-  - [CVRaman_Digital_output.html](CVRaman_Digital_output.html)
-  - [Kumar_Scanned_output.html](Kumar_Scanned_output.html)
+  - [CVRaman_output.html](CVRaman_output.html)
+  - [Kumar_output.html](Kumar_output.html)
 
 ## Usage
 
