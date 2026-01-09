@@ -44,4 +44,3 @@ This project converts PDFs into structured HTML using page-wise layout JSONs
 ```bash
 pip install -r requirements.txt
 python main.py --pdf input.pdf --json json_dir --output output.html --mode scanned|digital
-# doc2html
